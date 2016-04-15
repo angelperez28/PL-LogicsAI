@@ -1,0 +1,106 @@
+import ply.lex as lex
+
+# reserved = [ 'RESIST', 'VOLT', 'AMP', 'CAP', 'INDUCTANCE', 'AMPS', 'CIRC' ]
+# reserved = {'RESIST': 'RESISTOR', 'volt': 'VOLT', 'cap': 'CAPACITANCE',
+#             'induct': 'INDUCTANCE', 'amp': 'AMPERES', 'circ': 'CIRCUIT'}
+
+#Formatfor Zapdos use: {'<reserved_word>':'<token_name>'}
+reserved = {'and': 'AND',
+            'or': 'OR', 'if': 'IF', 'then': 'THEN'}
+
+
+#Listado de los tokens
+
+# tokens = list(reserved.values) + ['NUMBER', 'LPAREN', 'RPAREN', 'EQUAL', 'ID', 'SERIES', 'PARALLEL',
+#
+#                      # Operadores ( + , - , *, / )
+#
+#                      'PLUS', 'MINUS', 'TIMES', 'DIVIDE']
+tokens = ['SUBJECT', 'OBJECT', 'COMPOBJ', 'OP', 'AT', 'excAT', 'HASH', 'EVAL', 'THE', 'IS'] + list(reserved.values())
+
+# Regex rules for the tokens
+
+
+# Operadores
+
+
+
+# A string containing ignored characters (spaces and tabs)
+t_ignore  = ' \t'
+
+
+reserved_map = { }
+for r in reserved:
+    reserved_map[r.lower()] = r
+
+
+# A regular expression rule with some action code
+
+def t_THE(t):
+    r'\bthe\b'
+    t.type = reserved.get(t.value,'THE')    # Check for reserved words
+    return t
+
+def t_IS(t):
+    r'\bis\b'
+    t.type = reserved.get(t.value,'IS')    # Check for reserved words
+    return t
+
+def t_RESERVED(t):
+    r'[a-zA-Z_][a-zA-Z_]*'
+    t.type = reserved.get(t.value,'OP')    # Check for reserved words
+    return t
+
+def t_OBJECT(t):
+    r'\@[a-zA-Z_]*'
+    t.value = t.value[1:]
+    return t
+
+def t_COMPOBJ(t):
+    r'\!\@[a-zA-Z_]*'
+    t.value = t.value[2:]
+    return t
+
+def t_SUBJECT(t):
+    r'\#[a-zA-Z_]*'
+    t.value = t.value[1:]
+    return t
+
+
+# Regex para encontrar nombres de varialbles ID
+
+def t_COMMENT(t):
+    r'\;.*'
+    pass
+    # No return value. Token discarded
+
+# Define a rule so we can track line numbers
+def t_newline(t):
+    r'\n+'
+    t.lexer.lineno += len(t.value)
+
+
+# Error handling rule
+def t_error(t):
+    print("Illegal character '%s'" % t.value[0])
+    t.lexer.skip(1)
+
+
+
+# Build the lexer
+lexer = lex.lex()
+
+### Test it out
+data = "the #sky is @blue"
+##
+### Give the lexer some input
+lexer.input(data)
+##
+print(tokens)
+##
+### Tokenize
+while True:
+    tok = lexer.token()
+    if not tok:
+        break      # No more input
+    print(tok)

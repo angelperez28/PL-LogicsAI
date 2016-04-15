@@ -1,0 +1,331 @@
+Created by PLY version 3.8 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    OR
+    OP
+
+Grammar
+
+Rule 0     S' -> statement
+Rule 1     statement -> inquiry
+Rule 2     statement -> THE SUBJECT IS OBJECT
+Rule 3     statement -> THE SUBJECT IS NOT COMPOBJ
+Rule 4     statement -> THE SUBJECT AND SUBJECT ARE OBJECT
+Rule 5     statement -> THE SUBJECT AND SUBJECT ARE NOT COMPOBJ
+Rule 6     statement -> THE SUBJECT IS OBJECT AND NOT COMPOBJ
+Rule 7     statement -> IF THE SUBJECT IS OBJECT THEN SUBJECT IS OBJECT
+Rule 8     inquiry -> IS THE SUBJECT OBJECT
+Rule 9     inquiry -> WHAT IS OBJECT
+Rule 10    inquiry -> WHAT IS NOT COMPOBJ
+
+Terminals, with rules where they appear
+
+AND                  : 4 5 6
+ARE                  : 4 5
+COMPOBJ              : 3 5 6 10
+IF                   : 7
+IS                   : 2 3 6 7 7 8 9 10
+NOT                  : 3 5 6 10
+OBJECT               : 2 4 6 7 7 8 9
+OP                   : 
+OR                   : 
+SUBJECT              : 2 3 4 4 5 5 6 7 7 8
+THE                  : 2 3 4 5 6 7 8
+THEN                 : 7
+WHAT                 : 9 10
+error                : 
+
+Nonterminals, with rules where they appear
+
+inquiry              : 1
+statement            : 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . statement
+    (1) statement -> . inquiry
+    (2) statement -> . THE SUBJECT IS OBJECT
+    (3) statement -> . THE SUBJECT IS NOT COMPOBJ
+    (4) statement -> . THE SUBJECT AND SUBJECT ARE OBJECT
+    (5) statement -> . THE SUBJECT AND SUBJECT ARE NOT COMPOBJ
+    (6) statement -> . THE SUBJECT IS OBJECT AND NOT COMPOBJ
+    (7) statement -> . IF THE SUBJECT IS OBJECT THEN SUBJECT IS OBJECT
+    (8) inquiry -> . IS THE SUBJECT OBJECT
+    (9) inquiry -> . WHAT IS OBJECT
+    (10) inquiry -> . WHAT IS NOT COMPOBJ
+
+    THE             shift and go to state 5
+    IF              shift and go to state 6
+    IS              shift and go to state 2
+    WHAT            shift and go to state 1
+
+    inquiry                        shift and go to state 3
+    statement                      shift and go to state 4
+
+state 1
+
+    (9) inquiry -> WHAT . IS OBJECT
+    (10) inquiry -> WHAT . IS NOT COMPOBJ
+
+    IS              shift and go to state 7
+
+
+state 2
+
+    (8) inquiry -> IS . THE SUBJECT OBJECT
+
+    THE             shift and go to state 8
+
+
+state 3
+
+    (1) statement -> inquiry .
+
+    $end            reduce using rule 1 (statement -> inquiry .)
+
+
+state 4
+
+    (0) S' -> statement .
+
+
+
+state 5
+
+    (2) statement -> THE . SUBJECT IS OBJECT
+    (3) statement -> THE . SUBJECT IS NOT COMPOBJ
+    (4) statement -> THE . SUBJECT AND SUBJECT ARE OBJECT
+    (5) statement -> THE . SUBJECT AND SUBJECT ARE NOT COMPOBJ
+    (6) statement -> THE . SUBJECT IS OBJECT AND NOT COMPOBJ
+
+    SUBJECT         shift and go to state 9
+
+
+state 6
+
+    (7) statement -> IF . THE SUBJECT IS OBJECT THEN SUBJECT IS OBJECT
+
+    THE             shift and go to state 10
+
+
+state 7
+
+    (9) inquiry -> WHAT IS . OBJECT
+    (10) inquiry -> WHAT IS . NOT COMPOBJ
+
+    OBJECT          shift and go to state 12
+    NOT             shift and go to state 11
+
+
+state 8
+
+    (8) inquiry -> IS THE . SUBJECT OBJECT
+
+    SUBJECT         shift and go to state 13
+
+
+state 9
+
+    (2) statement -> THE SUBJECT . IS OBJECT
+    (3) statement -> THE SUBJECT . IS NOT COMPOBJ
+    (4) statement -> THE SUBJECT . AND SUBJECT ARE OBJECT
+    (5) statement -> THE SUBJECT . AND SUBJECT ARE NOT COMPOBJ
+    (6) statement -> THE SUBJECT . IS OBJECT AND NOT COMPOBJ
+
+    IS              shift and go to state 15
+    AND             shift and go to state 14
+
+
+state 10
+
+    (7) statement -> IF THE . SUBJECT IS OBJECT THEN SUBJECT IS OBJECT
+
+    SUBJECT         shift and go to state 16
+
+
+state 11
+
+    (10) inquiry -> WHAT IS NOT . COMPOBJ
+
+    COMPOBJ         shift and go to state 17
+
+
+state 12
+
+    (9) inquiry -> WHAT IS OBJECT .
+
+    $end            reduce using rule 9 (inquiry -> WHAT IS OBJECT .)
+
+
+state 13
+
+    (8) inquiry -> IS THE SUBJECT . OBJECT
+
+    OBJECT          shift and go to state 18
+
+
+state 14
+
+    (4) statement -> THE SUBJECT AND . SUBJECT ARE OBJECT
+    (5) statement -> THE SUBJECT AND . SUBJECT ARE NOT COMPOBJ
+
+    SUBJECT         shift and go to state 19
+
+
+state 15
+
+    (2) statement -> THE SUBJECT IS . OBJECT
+    (3) statement -> THE SUBJECT IS . NOT COMPOBJ
+    (6) statement -> THE SUBJECT IS . OBJECT AND NOT COMPOBJ
+
+    OBJECT          shift and go to state 20
+    NOT             shift and go to state 21
+
+
+state 16
+
+    (7) statement -> IF THE SUBJECT . IS OBJECT THEN SUBJECT IS OBJECT
+
+    IS              shift and go to state 22
+
+
+state 17
+
+    (10) inquiry -> WHAT IS NOT COMPOBJ .
+
+    $end            reduce using rule 10 (inquiry -> WHAT IS NOT COMPOBJ .)
+
+
+state 18
+
+    (8) inquiry -> IS THE SUBJECT OBJECT .
+
+    $end            reduce using rule 8 (inquiry -> IS THE SUBJECT OBJECT .)
+
+
+state 19
+
+    (4) statement -> THE SUBJECT AND SUBJECT . ARE OBJECT
+    (5) statement -> THE SUBJECT AND SUBJECT . ARE NOT COMPOBJ
+
+    ARE             shift and go to state 23
+
+
+state 20
+
+    (2) statement -> THE SUBJECT IS OBJECT .
+    (6) statement -> THE SUBJECT IS OBJECT . AND NOT COMPOBJ
+
+    $end            reduce using rule 2 (statement -> THE SUBJECT IS OBJECT .)
+    AND             shift and go to state 24
+
+
+state 21
+
+    (3) statement -> THE SUBJECT IS NOT . COMPOBJ
+
+    COMPOBJ         shift and go to state 25
+
+
+state 22
+
+    (7) statement -> IF THE SUBJECT IS . OBJECT THEN SUBJECT IS OBJECT
+
+    OBJECT          shift and go to state 26
+
+
+state 23
+
+    (4) statement -> THE SUBJECT AND SUBJECT ARE . OBJECT
+    (5) statement -> THE SUBJECT AND SUBJECT ARE . NOT COMPOBJ
+
+    OBJECT          shift and go to state 27
+    NOT             shift and go to state 28
+
+
+state 24
+
+    (6) statement -> THE SUBJECT IS OBJECT AND . NOT COMPOBJ
+
+    NOT             shift and go to state 29
+
+
+state 25
+
+    (3) statement -> THE SUBJECT IS NOT COMPOBJ .
+
+    $end            reduce using rule 3 (statement -> THE SUBJECT IS NOT COMPOBJ .)
+
+
+state 26
+
+    (7) statement -> IF THE SUBJECT IS OBJECT . THEN SUBJECT IS OBJECT
+
+    THEN            shift and go to state 30
+
+
+state 27
+
+    (4) statement -> THE SUBJECT AND SUBJECT ARE OBJECT .
+
+    $end            reduce using rule 4 (statement -> THE SUBJECT AND SUBJECT ARE OBJECT .)
+
+
+state 28
+
+    (5) statement -> THE SUBJECT AND SUBJECT ARE NOT . COMPOBJ
+
+    COMPOBJ         shift and go to state 31
+
+
+state 29
+
+    (6) statement -> THE SUBJECT IS OBJECT AND NOT . COMPOBJ
+
+    COMPOBJ         shift and go to state 32
+
+
+state 30
+
+    (7) statement -> IF THE SUBJECT IS OBJECT THEN . SUBJECT IS OBJECT
+
+    SUBJECT         shift and go to state 33
+
+
+state 31
+
+    (5) statement -> THE SUBJECT AND SUBJECT ARE NOT COMPOBJ .
+
+    $end            reduce using rule 5 (statement -> THE SUBJECT AND SUBJECT ARE NOT COMPOBJ .)
+
+
+state 32
+
+    (6) statement -> THE SUBJECT IS OBJECT AND NOT COMPOBJ .
+
+    $end            reduce using rule 6 (statement -> THE SUBJECT IS OBJECT AND NOT COMPOBJ .)
+
+
+state 33
+
+    (7) statement -> IF THE SUBJECT IS OBJECT THEN SUBJECT . IS OBJECT
+
+    IS              shift and go to state 34
+
+
+state 34
+
+    (7) statement -> IF THE SUBJECT IS OBJECT THEN SUBJECT IS . OBJECT
+
+    OBJECT          shift and go to state 35
+
+
+state 35
+
+    (7) statement -> IF THE SUBJECT IS OBJECT THEN SUBJECT IS OBJECT .
+
+    $end            reduce using rule 7 (statement -> IF THE SUBJECT IS OBJECT THEN SUBJECT IS OBJECT .)
+

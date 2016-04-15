@@ -1,0 +1,16 @@
+#--------------------------------------------------------------------------------------------------------------
+#                       Zapdos Tools for Ahkab library beta 1.0
+#---------------------------------------------------------------------------------------------------------------
+
+#Helper class that writes Python code adapted to Ahkab library as components are added
+class Definitions(object):
+
+  
+#Defines a circuit element
+class CircuitElement(object):
+
+  def __init__(self, elemType, ID, value):
+    #Initializing properties of any circuit element
+    self.ID = ID
+    self.elemType = elemType
+    self.value = value
