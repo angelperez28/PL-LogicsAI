@@ -5,7 +5,7 @@
 
 Required software:
 - **Python CLI Interpreter**
-- **Miniconda** environment with the following installed dependencies
+- **Anaconda** environment with the following installed dependencies
   - numpy
   - ply
 
