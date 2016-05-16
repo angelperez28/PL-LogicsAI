@@ -46,8 +46,8 @@ And you're done!
 -----------
 
 Available LogicsAI commands:
-- clear - Clear the current stored Zapdos code.
-- run - Run the current stored Zapdos code.
+- clear - Clear the current stored LogicsAI code.
+- run - Run the current stored LogicsAI code.
 - getall - get all the current subjects in memory
 - getcomplements - get all the current complements in memory
 - getobjects - get all the current objects in memory
