@@ -16,20 +16,15 @@ Required software:
 
 #### Running the LogicsAI Intepreter on *Windows*:
 
-After downloading the code, open the Command Line and set the path where the Zapdos folder is located:
+After downloading the code, open the Command Line and set the path where the LogicsAI folder is located:
 
 ```
 C:\System> cd C:\PL-LogicsAI
 ```
 
-Activate your Miniconda environment.
+Run your Parser with Python
 ```
-C:\ZapdosPL> activate conda-env
-```
-
-Then execute the following code:
-```
-[conda-env] C:\LogicsAI> python Parse.py
+C:\LogicsAI> python Parser.py
 ```
 
 And you should see the following:
